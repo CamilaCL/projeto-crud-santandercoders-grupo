@@ -1,0 +1,12 @@
+As 5 maiores transações são: 
+
+1: {'UUID': '18884217-7802-4f51-a8df-12d2b0a2de05', 'valor': 999.99, 'categoria': 'investimentos'}
+
+2: {'UUID': '30be8017-fd7b-4800-ac46-b0417d166faa', 'valor': 999.96, 'categoria': 'saude'}
+
+3: {'UUID': '3b43c06a-b05d-4660-8859-beae3cd6f290', 'valor': 999.89, 'categoria': 'casa'}
+
+4: {'UUID': 'd60794ff-d614-47d3-9e0e-1dcb9135a052', 'valor': 999.89, 'categoria': 'saude'}
+
+5: {'UUID': 'db5311d3-e0c0-41fc-bc44-7f35db8ab558', 'valor': 999.63, 'categoria': 'investimentos'}
+
