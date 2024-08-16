@@ -281,7 +281,7 @@ def salvar_relatorio(nome_arquivo, conteudo):
         nome_arquivo = str(nome_arquivo) + ".txt"
         caminho_arquivo = os.path.join(pasta_relatorios, nome_arquivo)
             
-        with open(nome_arquivo, "w", encoding="utf-8") as relatorio_txt:
+        with open(caminho_arquivo, "w", encoding="utf-8") as relatorio_txt:
             for linha in conteudo:
                 relatorio_txt.write(linha)
                 relatorio_txt.write("\n")
@@ -331,7 +331,7 @@ def mostrar_m5_transacoes(parametro):
 
         conteudo_relatorio_max5_transacoes = ["As 5 maiores transações são: \n"]
 
-        print("\n As 5 maiores transações são: ")
+        print("\n As 5 maiores transações são: \n")
         for idx, dado in enumerate(dados_ordenados):
             transacao_lista_temp = f"{idx+1}: {dado}\n"
             print(transacao_lista_temp)
@@ -344,7 +344,7 @@ def mostrar_m5_transacoes(parametro):
         dados_ordenados =  sorted(bd, key=lambda x: x['valor'], reverse=False)[0:5]
 
         conteudo_relatorio_min5_transacoes = ["As 5 menores transações são: \n"]
-        print("\n As 5 maiores transações são: ")
+        print("\n As 5 maiores transações são: \n")
         for idx, dado in enumerate(dados_ordenados):
             transacao_lista_temp = f"{idx+1}: {dado}\n"
             print(transacao_lista_temp)
@@ -360,7 +360,7 @@ def mostrar_m5_transacoes(parametro):
         transacoes_medianas = dados_ordenados[indice_mediano-2:indice_mediano+3]
 
         conteudo_relatorio_mean5_transacoes = ["As 5 transações medianas são: \n"]
-        print("\n As 5 transações medianas são: ")
+        print("\n As 5 transações medianas são: \n")
         for idx, dado in enumerate(transacoes_medianas):
             transacao_lista_temp = f"{idx+1}: {dado}\n"
             print(transacao_lista_temp)
