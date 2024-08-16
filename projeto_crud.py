@@ -231,15 +231,6 @@ def run():
 
         opcao_usuario = validar_opcao("menu_inicial")
         
-        # # exibe a tela inicial
-        # tela_inicial()
-    
-        # # Escolha da opção do usuário
-        # opcao_usuario = input("Digite a opção desejada: ").strip()
-        # opcao_usuario = validar_opcao(opcao_tela_inicial, "menu_inicial")
-    
-        # abaixo colocar a função que joga a pessoa para o próximo menu usando a variavel opcao tela inicial
-        
         if opcao_usuario == 0:
             print("Você saiu do sistema. Obrigado e volte sempre.")
             parar_programa = True
@@ -262,20 +253,6 @@ def visualizar_relatorios():
     """
     Mostra um menu de opcoes no qual gera relatórios com base na escolha do usuário.
     """
-
-    # print("\nEscolha um relatório para ser visualizado:")
-    # print("1. Exibir soma total de transações")
-    # print("2. Exibir as 5 transações mais caras")
-    # print("3. Exibir as 5 transações medianas")
-    # print("4. Exibir as 5 transações mais baratas")
-    # print("5. Exibir a média total")   
-    # print("6. Consultar transação por ID") 
-    # print("-" * 10)
-    # print("0. Voltar ao menu principal")
-    # print('\n')
-
-    # opcao_visualizar_relatorio = input("Digite a opção desejada: ").strip()
-    # opcao_visualizar_relatorio = validar_opcao(opcao_visualizar_relatorio, "visualizar_relatorios")
 
     opcao_usuario = validar_opcao("visualizar_relatorios")
 
@@ -329,7 +306,6 @@ def encontrar_transacao_por_chave_valor(lista_transacoes, chave, valor):
     return -1  # Retorna -1 se não encontrar
 
 
-# Quero criar uma forma de salvar os relatórios em uma pasta "relatorios"
 def salvar_relatorio(nome_arquivo, conteudo):
     """
     Salvar o relatório gerado em .txt
@@ -486,13 +462,6 @@ def consultar_transacao_por_ID():
 
         transacao_especifica = conteudo_transacao_especifica(lista_transacoes=bd, indice=indice, imprimir_na_tela=False)
         print(transacao_especifica)
-
-        #Comentado pq estou tentando fazer isso com função
-        #transacao_especifica = f"""
-        #ID: {bd[indice]["UUID"]}\n
-        #Valor: R$ {bd[indice]["valor"]:.2f}\n
-        #Categoria: {bd[indice]["categoria"]}
-        #"""
         
         
         nome_arquivo_transacao_especifica = "relatorio_transacao_id_" + id_consulta
@@ -539,28 +508,6 @@ def cadastrar_transacao():
 
     valor_transacao = valor_transacao_cadastro()
 
-    #Comentei pq estou testando fazer isso com função
-    
-    #while True:
-     #   
-      #  try:
-       #     valor_transacao_cadastro = float(input("Digite o valor da transação a ser cadastrada (use ponto em vez de vírgula no decimal): R$ ").strip())
-        #    if valor_transacao_cadastro < 0:
-         #       raise Exception("Não é possível cadastrar uma transação menor que R$ 0,00.")
-          #  break            
-        # except ValueError:
-         #   print("Digite somente números. Use ponto em vez de vírgula no decimal.")
-            
-        #except Exception as e:
-        #    print(f"Erro: {e} Tente novamente.")
-            
-        
-   # if valor_transacao_cadastro == 0:
-    #    print("\nRetornando ao menu inicial.\n")
-     #   run()
-
-    #valor_transacao_cadastro = round(valor_transacao_cadastro, 2)
-
     categoria_transacao_cadastro = input("Digite a categoria de cadastro dessa transação: ").strip().lower()
 
     transacao = {
@@ -574,15 +521,6 @@ def cadastrar_transacao():
     "Valor": R$ {transacao["valor"]}\n
     "Categoria": {transacao["categoria"]}
     """)
-
-    # print("\nDeseja continuar o cadastro dessa transação?")
-    # print("1. Cadastra a transação")
-    # print("2. Refazer o cadastro da transação")
-    # print("0. Cancelar cadastro e voltar ao menu inicial\n")
-
-    # continuar_cadastro = input("Escolha uma das opções acima: (1, 2 ou 0)" ).strip()
-    # while continuar_cadastro not in ['1', '2', '0']: 
-    #     continuar_cadastro = input("Escolha uma das opções acima: (1, 2 ou 0)" ).strip()
 
     opcao_usuario = validar_opcao("cadastrar_transacao")
 
@@ -621,26 +559,6 @@ def editar_transacao_por_ID():
     else:
         print("\nTrasanção encontrada!\n")
         conteudo_transacao_especifica(lista_transacoes=bd, indice=indice, imprimir_na_tela=True)
-        
-        #transacao_especifica = f"""
-        #ID: {bd[indice]["UUID"]}\n
-        #Valor: R$ {bd[indice]["valor"]:.2f}\n
-        #Categoria: {bd[indice]["categoria"]}
-        #"""
-        
-        #print(transacao_especifica)
-
-
-        # print("Escolha a opção que deseja editar")
-        # print("1. Valor")
-        # print("2. Categoria")
-        # print("0. Retornar ao Menu Principal")
-        
-    
-        # opcao_usuario = input("Escolha uma das opções acima: (1, 2 ou 0)" ).strip()
-
-        # while opcao_usuario not in ['1', '2', '0']: 
-        #     opcao_usuario = input("Opção inválida. Escolha uma das opções acima: (1, 2 ou 0)" ).strip()
 
         opcao_usuario = validar_opcao("editar_transacao")
     
@@ -652,13 +570,6 @@ def editar_transacao_por_ID():
 
             conteudo_transacao_especifica(lista_transacoes = bd, indice = indice, imprimir=True)
             
-            #transacao_especifica = f"""
-            #ID: {bd[indice]["UUID"]}\n
-           # Valor: R$ {bd[indice]["valor"]:.2f}\n
-           # Categoria: {bd[indice]["categoria"]}
-           # """
-        
-            #print(conteudo_transacao_especifica)
             print("\nRetornando ao Menu Inicial\n")
             run()
     
