@@ -46,6 +46,8 @@ import os
 import uuid
 import random
 import sys
+from datetime import datetime
+
 
 # -----------------------
 # load settings
@@ -136,34 +138,119 @@ def tela_inicial():
 # pode editar como quiser as funções abaixo! Somente não altere os nomes das funções.
 # para alterar as funções abaixo, basta apagar o `pass` e preencher com as instruções.
 
+def imprimir_menu_opcoes(menu):
+    """
+    Essa função imprime as opções do menu na tela
+    """
+
+    if menu == "menu_inicial":
+        print("Bem-vindo <teu nome inteiro aqui>!")
+        print('conta: 0000001-0')
+        print("\nEste programa permite gerenciar transações de sua conta pessoal.")
+        print("\nEscolha uma das opções abaixo:")
+        print("1. Visualizar relatórios")
+        print("2. Cadastrar transações")
+        print("3. Editar transações")
+        print("4. Excluir transações")
+        print("-" * 10)
+        print("0. Sair")
+        print('\n')
+
+    elif menu == "visualizar_relatorios":
+        
+        print("\nEscolha um relatório para ser visualizado:")
+        print("1. Exibir soma total de transações")
+        print("2. Exibir as 5 transações mais caras")
+        print("3. Exibir as 5 transações medianas")
+        print("4. Exibir as 5 transações mais baratas")
+        print("5. Exibir a média total")   
+        print("6. Consultar transação por ID") 
+        print("-" * 10)
+        print("0. Voltar ao menu principal")
+        print('\n')
+
+    elif menu == "cadastrar_transacao":
+        
+        print("\nDeseja continuar o cadastro dessa transação?")
+        print("1. Cadastra a transação")
+        print("2. Refazer o cadastro da transação")
+        print("0. Cancelar cadastro e voltar ao menu inicial\n")
+
+    elif menu == "editar_transacao":
+        
+        print("Escolha a opção que deseja editar")
+        print("1. Valor")
+        print("2. Categoria")
+        print("0. Retornar ao Menu Principal")
+        
+
+def validar_opcao(menu):
+    """
+    Função para validar a opção do usuário no menu
+    """
+    quantidade_opcoes_menu = {"menu_inicial" : 4, "visualizar_relatorios": 6, "cadastrar_transacao": 2, "editar_transacao": 2}
+
+    imprimir_menu_opcoes(menu)
+
+    opcao_usuario = input("Digite a opção desejada: ").strip()
+
+    global trava_menu
+    trava_menu = False
+
+    while not trava_menu:
+    
+        try:
+            opcao_usuario = int(opcao_usuario)
+            if opcao_usuario < 0 or opcao_usuario > quantidade_opcoes_menu[menu]:
+                raise Exception("Opção não existente.")
+                
+        except ValueError:
+            print("\nOpção inválida. Digite somente números. Tente novamente.")
+            print("")
+            validar_opcao(menu)
+            
+        except Exception as e:
+            print(f"\n{e} Tente novamente.")
+            print("")
+            validar_opcao(menu)
+            
+        else:
+            trava_menu = True
+            return opcao_usuario
+        
+
 def run():
     """
     Esta é a função principal que vai rodar o programa
     """  
+    
     global parar_programa
     parar_programa = False
     
     while not parar_programa:
+
+        opcao_usuario = validar_opcao("menu_inicial")
         
-        # exibe a tela inicial
-        tela_inicial()
+        # # exibe a tela inicial
+        # tela_inicial()
     
-        # Escolha da opção do usuário
-        opcao_tela_inicial = input("Digite a opção desejada: ").strip()
-        opcao_tela_inicial = validar_opcao(opcao_tela_inicial, "menu_inicial")
+        # # Escolha da opção do usuário
+        # opcao_usuario = input("Digite a opção desejada: ").strip()
+        # opcao_usuario = validar_opcao(opcao_tela_inicial, "menu_inicial")
     
         # abaixo colocar a função que joga a pessoa para o próximo menu usando a variavel opcao tela inicial
-        if opcao_tela_inicial == 0:
+        
+        if opcao_usuario == 0:
             print("Você saiu do sistema. Obrigado e volte sempre.")
             parar_programa = True
             
-        elif opcao_tela_inicial == 1:
+        elif opcao_usuario == 1:
             visualizar_relatorios()
 
-        elif opcao_tela_inicial == 2:    
+        elif opcao_usuario == 2:    
             cadastrar_transacao()
             
-        elif opcao_tela_inicial == 3:
+        elif opcao_usuario == 3:
             editar_transacao_por_ID()
             
         else:
@@ -171,88 +258,67 @@ def run():
             excluir_transacao()
         
 
-def validar_opcao(opcao_usuario, menu):
-    """
-    Função para validar a opção do usuário no menu
-    """
-    quantidade_opcoes_menu = {"menu_inicial" : 4, "visualizar_relatorios": 6}
-
-    try:
-        opcao_usuario = int(opcao_usuario)
-        if opcao_usuario < 0 or opcao_usuario > quantidade_opcoes_menu[menu]:
-            raise Exception("Opção inválida")
-            
-    except ValueError:
-        print("Opção inválida. Digite somente números.")
-        print("")
-        return None
-        
-    except Exception as e:
-        print("Opção inválida")
-        print("")
-        return None
-        
-    else:
-        return opcao_usuario
-        
-
 def visualizar_relatorios():
     """
     Mostra um menu de opcoes no qual gera relatórios com base na escolha do usuário.
     """
 
-    print("\nEscolha um relatório para ser visualizado:")
-    print("1. Exibir soma total de transações")
-    print("2. Exibir as 5 transações mais caras")
-    print("3. Exibir as 5 transações medianas")
-    print("4. Exibir as 5 transações mais baratas")
-    print("5. Exibir a média total")   
-    print("6. Consultar transação por ID") 
-    print("-" * 10)
-    print("0. Voltar ao menu principal")
-    print('\n')
+    # print("\nEscolha um relatório para ser visualizado:")
+    # print("1. Exibir soma total de transações")
+    # print("2. Exibir as 5 transações mais caras")
+    # print("3. Exibir as 5 transações medianas")
+    # print("4. Exibir as 5 transações mais baratas")
+    # print("5. Exibir a média total")   
+    # print("6. Consultar transação por ID") 
+    # print("-" * 10)
+    # print("0. Voltar ao menu principal")
+    # print('\n')
 
-    opcao_visualizar_relatorio = input("Digite a opção desejada: ").strip()
-    opcao_visualizar_relatorio = validar_opcao(opcao_visualizar_relatorio, "visualizar_relatorios")
+    # opcao_visualizar_relatorio = input("Digite a opção desejada: ").strip()
+    # opcao_visualizar_relatorio = validar_opcao(opcao_visualizar_relatorio, "visualizar_relatorios")
 
-    if opcao_visualizar_relatorio == 0:
+    opcao_usuario = validar_opcao("visualizar_relatorios")
+
+
+    if opcao_usuario == 0:
         print("Retornando ao menu principal")
         run()
         
-    elif opcao_visualizar_relatorio == 1:
+    elif opcao_usuario == 1:
         print("\nCalculando soma total das transações...\n")
         calcular_total_transacoes()
 
-    elif opcao_visualizar_relatorio == 2:
+    elif opcao_usuario == 2:
         print("\nCalculando as 5 transações mais caras...\n")    
         mostrar_m5_transacoes("max")
    
-    elif opcao_visualizar_relatorio == 3:
+    elif opcao_usuario == 3:
         print("Calculando as 5 transações medianas...")
         mostrar_m5_transacoes("mean")
 
-    elif opcao_visualizar_relatorio == 4:
+    elif opcao_usuario == 4:
         print("Calculando as 5 transações mais baratas...")
         mostrar_m5_transacoes("min")
 
-    elif opcao_visualizar_relatorio == 5:
+    elif opcao_usuario == 5:
         print("Calculando a média de todas as trasações...") 
         calcular_media()
 
     else:
         consultar_transacao_por_ID()
 
+
 def conteudo_transacao_especifica(lista_transacoes, indice, imprimir_na_tela=False):
     
-    conteudo_transacao_especifica = f"""
+    transacao_especifica = f"""
         ID: {lista_transacoes[indice]["UUID"]}\n
         Valor: R$ {lista_transacoes[indice]["valor"]:.2f}\n
         Categoria: {lista_transacoes[indice]["categoria"]}
         """
     if imprimir_na_tela == True:
-        print(conteudo_transacao_especifica)
+        print(transacao_especifica)
     else:
-        return conteudo_transacao_especifica
+        return transacao_especifica
 
 
 
@@ -269,6 +335,7 @@ def salvar_relatorio(nome_arquivo, conteudo):
     Salvar o relatório gerado em .txt
     \nAplicar esta função em todos os relatórios listados em `visualizar_relatorios`
     """ 
+    
     salvar_relatorio = input("Deseja salvar o relatório? [S / N] ").strip().upper()[0]
 
     while salvar_relatorio not in ["S", "N"]:
@@ -278,7 +345,13 @@ def salvar_relatorio(nome_arquivo, conteudo):
         
         pasta_relatorios = "relatorios"
         os.makedirs(pasta_relatorios, exist_ok=True)  
-        nome_arquivo = str(nome_arquivo) + ".txt"
+
+        #Concatenação de data e hora no nome do arquivo para que não sobrescrevam arquivos do mesmo modelo.
+        data_hora_atual = datetime.now()
+        data_hora_str = data_hora_atual.strftime('%Y-%m-%d_%H-%M-%S')
+
+        
+        nome_arquivo = str(nome_arquivo) + "_" + data_hora_str + ".txt"
         caminho_arquivo = os.path.join(pasta_relatorios, nome_arquivo)
             
         with open(caminho_arquivo, "w", encoding="utf-8") as relatorio_txt:
@@ -411,11 +484,11 @@ def consultar_transacao_por_ID():
     else:
         print("\nTrasanção encontrada!\n")
 
-        conteudo_transacao_especifica = conteudo_transacao_especifica(lista_transacoes=bd, indice=indice, imprimir_na_tela=False)
-        print(conteudo_transacao_especifica)
+        transacao_especifica = conteudo_transacao_especifica(lista_transacoes=bd, indice=indice, imprimir_na_tela=False)
+        print(transacao_especifica)
 
         #Comentado pq estou tentando fazer isso com função
-        #conteudo_transacao_especifica = f"""
+        #transacao_especifica = f"""
         #ID: {bd[indice]["UUID"]}\n
         #Valor: R$ {bd[indice]["valor"]:.2f}\n
         #Categoria: {bd[indice]["categoria"]}
@@ -424,7 +497,7 @@ def consultar_transacao_por_ID():
         
         nome_arquivo_transacao_especifica = "relatorio_transacao_id_" + id_consulta
         
-        salvar_relatorio(nome_arquivo_transacao_especifica, conteudo_transacao_especifica)
+        salvar_relatorio(nome_arquivo_transacao_especifica, transacao_especifica)
 
 
 def valor_transacao_cadastro():
@@ -448,6 +521,7 @@ def valor_transacao_cadastro():
     valor_transacao = round(valor_transacao, 2)
 
     return valor_transacao
+
 
 def cadastrar_transacao():
     """
@@ -501,20 +575,22 @@ def cadastrar_transacao():
     "Categoria": {transacao["categoria"]}
     """)
 
-    print("\nDeseja continuar o cadastro dessa transação?")
-    print("1. Cadastra a transação")
-    print("2. Refazer o cadastro da transação")
-    print("0. Cancelar cadastro e voltar ao menu inicial\n")
+    # print("\nDeseja continuar o cadastro dessa transação?")
+    # print("1. Cadastra a transação")
+    # print("2. Refazer o cadastro da transação")
+    # print("0. Cancelar cadastro e voltar ao menu inicial\n")
 
-    continuar_cadastro = input("Escolha uma das opções acima: (1, 2 ou 0)" ).strip()
-    while continuar_cadastro not in ['1', '2', '0']: 
-        continuar_cadastro = input("Escolha uma das opções acima: (1, 2 ou 0)" ).strip()
+    # continuar_cadastro = input("Escolha uma das opções acima: (1, 2 ou 0)" ).strip()
+    # while continuar_cadastro not in ['1', '2', '0']: 
+    #     continuar_cadastro = input("Escolha uma das opções acima: (1, 2 ou 0)" ).strip()
 
-    if continuar_cadastro == "1":
+    opcao_usuario = validar_opcao("cadastrar_transacao")
+
+    if opcao_usuario == "1":
         bd.append(transacao)
         print("\nTransação cadastrada com sucesso\n")
 
-    elif continuar_cadastro == "2":
+    elif opcao_usuario == "2":
         cadastrar_transacao()
 
     else:
@@ -544,37 +620,39 @@ def editar_transacao_por_ID():
 
     else:
         print("\nTrasanção encontrada!\n")
-        conteudo_transacao_especifica = conteudo_transacao_especifica(lista_transacoes=bd, indice=indice, imprimir_na_tela=True)
+        conteudo_transacao_especifica(lista_transacoes=bd, indice=indice, imprimir_na_tela=True)
         
-        #conteudo_transacao_especifica = f"""
+        #transacao_especifica = f"""
         #ID: {bd[indice]["UUID"]}\n
         #Valor: R$ {bd[indice]["valor"]:.2f}\n
         #Categoria: {bd[indice]["categoria"]}
         #"""
         
-        #print(conteudo_transacao_especifica)
+        #print(transacao_especifica)
 
 
-        print("Escolha a opção que deseja editar")
-        print("1. Valor")
-        print("2. Categoria")
-        print("0. Retornar ao Menu Principal")
+        # print("Escolha a opção que deseja editar")
+        # print("1. Valor")
+        # print("2. Categoria")
+        # print("0. Retornar ao Menu Principal")
         
     
-        opcao_edicao_cadastro = input("Escolha uma das opções acima: (1, 2 ou 0)" ).strip()
+        # opcao_usuario = input("Escolha uma das opções acima: (1, 2 ou 0)" ).strip()
 
-        while opcao_edicao_cadastro not in ['1', '2', '0']: 
-            opcao_edicao_cadastro = input("Opção inválida. Escolha uma das opções acima: (1, 2 ou 0)" ).strip()
+        # while opcao_usuario not in ['1', '2', '0']: 
+        #     opcao_usuario = input("Opção inválida. Escolha uma das opções acima: (1, 2 ou 0)" ).strip()
+
+        opcao_usuario = validar_opcao("editar_transacao")
     
-        if opcao_edicao_cadastro == "1":
-            novo_valor_transacao = valor_transacao_cadastro()
+        if opcao_usuario == "1":
+            novo_valor_transacao = opcao_usuario()
             bd[indice]["valor"] = novo_valor_transacao
             
             print("\nEdição concluída com sucesso. Novos dados dessa transação abaixo: \n")
 
             conteudo_transacao_especifica(lista_transacoes = bd, indice = indice, imprimir=True)
             
-            #conteudo_transacao_especifica = f"""
+            #transacao_especifica = f"""
             #ID: {bd[indice]["UUID"]}\n
            # Valor: R$ {bd[indice]["valor"]:.2f}\n
            # Categoria: {bd[indice]["categoria"]}
@@ -585,7 +663,7 @@ def editar_transacao_por_ID():
             run()
     
     
-        elif opcao_edicao_cadastro == "2":
+        elif opcao_usuario == "2":
             nova_categoria_transacao = input("Digite a nova categoria dessa transação: ").strip().lower()
             bd[indice]["categoria"] = nova_categoria_transacao
             
@@ -598,6 +676,7 @@ def editar_transacao_por_ID():
         else:
             print("\nEdição cancelada. Retornando ao Menu Principal\n")
             run()
+
 
 def excluir_transacao():
     """
@@ -620,7 +699,7 @@ def excluir_transacao():
         print("\nTrasanção encontrada!\n")
         print("Dados da transação a ser excluída:\n")
         
-        conteudo_transacao_especifica = conteudo_transacao_especifica(lista_transacoes=bd, indice=indice, imprimir_na_tela=True)
+        conteudo_transacao_especifica(lista_transacoes=bd, indice=indice, imprimir_na_tela=True)
         
         opcao_final_exclusao = input("Você tem certeza que deseja excluir essa transação? [S / N] ").strip().upper()[0]
     
@@ -639,10 +718,13 @@ def excluir_transacao():
             run()
         
 
+
 # -----------------------
 # ABAIXO PODE ALTERAR
 # -----------------------
 #limpar console (opcional)
 os.system('cls' if os.name == 'nt' else 'clear')
+
+
 # inicia o programa
 run()
