@@ -1,7 +1,0 @@
-
-        ID: d2c72290-006d-476f-b4c1-bcc34bea2888
-
-        Valor: R$ 587.80
-
-        Categoria: casa
-        
