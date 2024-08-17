@@ -2,6 +2,10 @@ Vídeo demonstração modelo final - Feito por um professor
 
 
 
+https://github.com/user-attachments/assets/b8869c7e-a0e2-421b-be2e-09d359328bf4
+
+
+
 _ Lógica de programacao II - Ada Tech - Santander Coders_
 
 Esse programa é um sistema de gestao de transacoes de uma conta bancária pessoal<br>
