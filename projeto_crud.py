@@ -9,7 +9,7 @@ import uuid
 import random
 import sys
 from datetime import datetime
-from IPython.display import clear_output
+from time import sleep
 
 
 # -----------------------
@@ -179,6 +179,10 @@ def definir_conta():
   return conta_final_usuario
 
 def informacoes_login():
+
+    print("Bem vindo ao banco Santander - Ada Tech.")
+    print("Para acessar, insira suas informações de login\n")
+    
     nome_usuario = validar_nome_usuario()
     conta_usuario = definir_conta()
     return nome_usuario, conta_usuario
@@ -355,6 +359,11 @@ def run():
     """
     Esta é a função principal que vai rodar o programa
     """  
+    print("Carregando Menu...")
+    
+    sleep(3)
+    
+    os.system('cls' if os.name == 'nt' else 'clear')
 
     global parar_programa
     parar_programa = False
@@ -573,7 +582,8 @@ def mostrar_m5_transacoes(parametro):
         else:
             
             conteudo_relatorio_max5_transacoes = [f"As 5 maiores transações da categoria {categoria_para_filtrar.capitalize()} são \n"]
-    
+
+            print("")
             print(conteudo_relatorio_max5_transacoes[0])
             for idx, dado in enumerate(dados_ordenados):
                 transacao_lista_temp = f"{idx+1}: {dado}\n"
@@ -592,6 +602,8 @@ def mostrar_m5_transacoes(parametro):
         if opcao_usuario == 8:
             
             conteudo_relatorio_min5_transacoes = ["As 5 menores transações são: \n"]
+            
+            print("")
             print(conteudo_relatorio_min5_transacoes[0])
             for idx, dado in enumerate(dados_ordenados):
                 transacao_lista_temp = f"{idx+1}: {dado}\n"
@@ -604,6 +616,8 @@ def mostrar_m5_transacoes(parametro):
         else:
 
             conteudo_relatorio_min5_transacoes = [f"As 5 menores transações da categoria {categoria_para_filtrar.capitalize()} são: \n"]
+            
+            print("")
             print(conteudo_relatorio_min5_transacoes[0])
             for idx, dado in enumerate(dados_ordenados):
                 transacao_lista_temp = f"{idx+1}: {dado}\n"
@@ -625,6 +639,8 @@ def mostrar_m5_transacoes(parametro):
         if opcao_usuario == 8:
             
             conteudo_relatorio_mean5_transacoes = ["As 5 transações medianas são: \n"]
+            
+            print("")
             print(conteudo_relatorio_mean5_transacoes[0])
             for idx, dado in enumerate(transacoes_medianas):
                 transacao_lista_temp = f"{idx+1}: {dado}\n"
@@ -637,6 +653,8 @@ def mostrar_m5_transacoes(parametro):
         else:
             
             conteudo_relatorio_mean5_transacoes = [f"As 5 transações medianas da categoria {categoria_para_filtrar.capitalize()} são: \n"]
+            
+            print("")
             print(conteudo_relatorio_mean5_transacoes[0])
             for idx, dado in enumerate(transacoes_medianas):
                 transacao_lista_temp = f"{idx+1}: {dado}\n"
