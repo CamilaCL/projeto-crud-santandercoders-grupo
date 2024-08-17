@@ -567,6 +567,7 @@ def mostrar_m5_transacoes(parametro):
             
             conteudo_relatorio_max5_transacoes = ["As 5 maiores transações são: \n"]
     
+            print("")
             print(conteudo_relatorio_max5_transacoes[0])
             for idx, dado in enumerate(dados_ordenados):
                 transacao_lista_temp = f"{idx+1}: {dado}\n"
@@ -848,6 +849,7 @@ def cadastrar_transacao():
         return run()
 
 
+
 def editar_transacao_por_ID():
     """
     Edita uma transação específica pelo seu UUID.
@@ -865,8 +867,8 @@ def editar_transacao_por_ID():
     indice = encontrar_transacao_por_chave_valor(bd, "UUID", id_consulta)
 
     if indice == -1:
-        print("\nTransação não encontrada. Tente novamente.")
-        return editar_transacao_por_ID()
+        print("\nTransação não encontrada.")
+        return refazer_operacao("repetir_editar_transacao")
 
 
     else:
@@ -916,8 +918,8 @@ def excluir_transacao():
     indice = encontrar_transacao_por_chave_valor(bd, "UUID", id_consulta)
 
     if indice == -1:
-        print("\nTransação não encontrada. Voltando ao Menu Principal")
-        return run()
+        print("\nTransação não encontrada.")
+        return refazer_operacao("repetir_excluir_transacao")
 
     else:
         print("\nTrasanção encontrada!\n")
@@ -940,7 +942,6 @@ def excluir_transacao():
         else:
             print("\nExclusão cancelada. Retornando ao menu principal\n")
             return run()
-        
 
 
 # -----------------------
