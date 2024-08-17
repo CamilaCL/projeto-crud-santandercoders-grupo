@@ -1,5 +1,3 @@
-# Boa sorte e divirtam-se :)
-# ------------------------------------------------------------------------------
 # -----------------------
 # depencies
 # -----------------------
@@ -82,11 +80,13 @@ if __name__ == "__main__":
     bd = load_bd()
     # -----------------------
 
+
 # -----------------------
 # PROGRAM functions 
 # -----------------------
 # pode editar como quiser as funções abaixo! Somente não altere os nomes das funções.
 # para alterar as funções abaixo, basta apagar o `pass` e preencher com as instruções.
+
 
 def validar_nome_usuario():
     nome_usuario = input("\nDigite seu nome: ")
@@ -173,16 +173,15 @@ def validar_digito_conta_usuario():
 
 
 def definir_conta():
-  conta_usuario = validar_conta_usuario()
-  digito_conta_usuario = validar_digito_conta_usuario()
-  conta_final_usuario = str(conta_usuario) + "-" + str(digito_conta_usuario)
-  return conta_final_usuario
+    conta_usuario = validar_conta_usuario()
+    digito_conta_usuario = validar_digito_conta_usuario()
+    conta_final_usuario = str(conta_usuario) + "-" + str(digito_conta_usuario)
+    return conta_final_usuario
 
 def informacoes_login():
 
     print("Bem vindo ao banco Santander - Ada Tech.")
     print("Para acessar, insira suas informações de login\n")
-    
     nome_usuario = validar_nome_usuario()
     conta_usuario = definir_conta()
     return nome_usuario, conta_usuario
@@ -192,8 +191,7 @@ def imprimir_menu_opcoes(menu):
     """
     Essa função imprime as opções do menu na tela
     """
-    os.system('cls' if os.name == 'nt' else 'clear')
-
+    
     if menu == "menu_inicial":
         print(f"\nBem-vindo {nome_usuario}!")
         print(f'conta: {conta_usuario}')
@@ -322,16 +320,16 @@ def refazer_operacao(menu):
     opcao_usuario = validar_opcao(menu)
 
     if opcao_usuario == 1 and menu == "repetir_cadastrar_transacao":
-        cadastrar_transacao()
+        return cadastrar_transacao()
 
     elif opcao_usuario == 1 and menu == "repetir_editar_transacao":
-        editar_transacao_por_ID()
+        return editar_transacao_por_ID()
 
     elif opcao_usuario == 1 and menu == "repetir_excluir_transacao":
-        excluir_transacao()
+        return excluir_transacao()
 
     else:
-        run()
+        return run()
 
 
 def escolher_categoria_transacao():
@@ -389,7 +387,7 @@ def run():
             print("\nMenu excluir transação\n")
             excluir_transacao()
 
-
+        
 def visualizar_relatorios():
 
     """
@@ -401,25 +399,25 @@ def visualizar_relatorios():
 
     if opcao_usuario == 0:
         print("Retornando ao menu principal")
-        run()
+        return run()
         
     elif opcao_usuario == 1:
-        calcular_total_transacoes()
+        return calcular_total_transacoes()
 
     elif opcao_usuario == 2:
-        mostrar_m5_transacoes("max")
+        return mostrar_m5_transacoes("max")
    
     elif opcao_usuario == 3:
-        mostrar_m5_transacoes("mean")
+        return mostrar_m5_transacoes("mean")
 
     elif opcao_usuario == 4:
-        mostrar_m5_transacoes("min")
+        return mostrar_m5_transacoes("min")
 
     elif opcao_usuario == 5:
-        calcular_media()
+        return calcular_media()
 
     else:
-        consultar_transacao_por_ID()
+        return consultar_transacao_por_ID()
 
 
 def conteudo_transacao_especifica(lista_transacoes, indice, imprimir_na_tela=False):
@@ -441,7 +439,6 @@ def encontrar_transacao_por_chave_valor(lista_transacoes, chave, valor):
         if transacao.get(chave) == valor:
             return i # Retorna o índice na lista, caso encontre
     return -1  # Retorna -1 se não encontrar
-
 
 def definir_categoria_filtragem(opcao_usuario):
     
@@ -494,7 +491,7 @@ def salvar_relatorio(nome_arquivo, conteudo):
             print(f"\nArquivo salvo sob o nome {nome_arquivo} na pasta relatorios.\n")
     
             print("Voltando ao menu principal\n")
-            run()
+            return run()
 
 
         else:
@@ -505,12 +502,12 @@ def salvar_relatorio(nome_arquivo, conteudo):
             print(f"\nArquivo salvo sob o nome {nome_arquivo} na pasta relatorios.\n")
     
             print("Voltando ao menu principal\n")
-            run()
+            return run()
             
 
     else:
         print("\nVoltando ao menu principal\n")
-        run()
+        return run()
 
 
 def calcular_total_transacoes():
@@ -539,7 +536,7 @@ def calcular_total_transacoes():
 
     print("")
     
-    salvar_relatorio(nome_relatorio, conteudo_relatorio_total_transacoes)
+    return salvar_relatorio(nome_relatorio, conteudo_relatorio_total_transacoes)
 
 
 def mostrar_m5_transacoes(parametro):
@@ -577,7 +574,7 @@ def mostrar_m5_transacoes(parametro):
                 
                 conteudo_relatorio_max5_transacoes.append(transacao_lista_temp)
     
-            salvar_relatorio("relatorio_5_maiores_transacoes", conteudo_relatorio_max5_transacoes)
+            return salvar_relatorio("relatorio_5_maiores_transacoes", conteudo_relatorio_max5_transacoes)
 
         else:
             
@@ -593,7 +590,7 @@ def mostrar_m5_transacoes(parametro):
 
             nome_relatorio = "relatorio_5_maiores_transacoes_" + categoria_para_filtrar
     
-            salvar_relatorio(nome_relatorio, conteudo_relatorio_max5_transacoes)
+            return salvar_relatorio(nome_relatorio, conteudo_relatorio_max5_transacoes)
             
 
     elif parametro == "min":
@@ -611,7 +608,7 @@ def mostrar_m5_transacoes(parametro):
                 
                 conteudo_relatorio_min5_transacoes.append(transacao_lista_temp)
     
-            salvar_relatorio("relatorio_5_menores_transacoes", conteudo_relatorio_min5_transacoes)
+            return salvar_relatorio("relatorio_5_menores_transacoes", conteudo_relatorio_min5_transacoes)
 
         else:
 
@@ -627,7 +624,7 @@ def mostrar_m5_transacoes(parametro):
 
             nome_relatorio = "relatorio_5_menores_transacoes_" + categoria_para_filtrar
             
-            salvar_relatorio(nome_relatorio, conteudo_relatorio_min5_transacoes)            
+            return salvar_relatorio(nome_relatorio, conteudo_relatorio_min5_transacoes)            
 
 
     elif parametro == "mean":
@@ -648,7 +645,7 @@ def mostrar_m5_transacoes(parametro):
                 
                 conteudo_relatorio_mean5_transacoes.append(transacao_lista_temp)
         
-            salvar_relatorio("relatorio_5_transacoes_medianas", conteudo_relatorio_mean5_transacoes)
+            return salvar_relatorio("relatorio_5_transacoes_medianas", conteudo_relatorio_mean5_transacoes)
 
         else:
             
@@ -663,7 +660,7 @@ def mostrar_m5_transacoes(parametro):
                 conteudo_relatorio_mean5_transacoes.append(transacao_lista_temp)
         
             nome_relatorio = "relatorio_5_transacoes_medianas_" + categoria_para_filtrar
-            salvar_relatorio(nome_relatorio, conteudo_relatorio_mean5_transacoes)
+            return salvar_relatorio(nome_relatorio, conteudo_relatorio_mean5_transacoes)
 
             
 
@@ -695,7 +692,7 @@ def calcular_media():
         print(conteudo_media_valores_transacoes)
         print("")
         
-        salvar_relatorio("relatorio_media_valores_transacoes", conteudo_media_valores_transacoes)
+        return salvar_relatorio("relatorio_media_valores_transacoes", conteudo_media_valores_transacoes)
 
     else:
         conteudo_media_valores_transacoes = f"A média de valores das transações dessa conta na categoria {categoria_para_filtrar.capitalize()} é de R$ {media_valores_transacoes:.2f}"
@@ -706,7 +703,50 @@ def calcular_media():
 
         nome_relatorio = "relatorio_media_valores_transacoes_" + categoria_para_filtrar
         
-        salvar_relatorio(nome_relatorio, conteudo_media_valores_transacoes)
+        return salvar_relatorio(nome_relatorio, conteudo_media_valores_transacoes)
+
+            
+
+def calcular_media():
+    """
+    Calcula a média dos valores das transações.
+    Utilize essa mesma função para o caso `por categoria`
+    """
+
+    opcao_usuario = validar_opcao("escolha_categoria_relatorio")
+    
+    if opcao_usuario == 8:
+        dados = bd
+
+    else:
+        categoria_para_filtrar = definir_categoria_filtragem(opcao_usuario)
+        dados = [transacao for transacao in bd if transacao["categoria"] == categoria_para_filtrar]
+      
+    
+    total_transacoes = sum(float(transacao["valor"]) for transacao in dados)
+    quantidade_transacoes = len(dados)
+
+    media_valores_transacoes = total_transacoes / quantidade_transacoes
+
+    if opcao_usuario == 8: 
+        conteudo_media_valores_transacoes = f"A média de valores das transações dessa conta é de R$ {media_valores_transacoes:.2f}"
+    
+        print("")
+        print(conteudo_media_valores_transacoes)
+        print("")
+        
+        return salvar_relatorio("relatorio_media_valores_transacoes", conteudo_media_valores_transacoes)
+
+    else:
+        conteudo_media_valores_transacoes = f"A média de valores das transações dessa conta na categoria {categoria_para_filtrar.capitalize()} é de R$ {media_valores_transacoes:.2f}"
+    
+        print("")
+        print(conteudo_media_valores_transacoes)
+        print("")
+
+        nome_relatorio = "relatorio_media_valores_transacoes_" + categoria_para_filtrar
+        
+        return salvar_relatorio(nome_relatorio, conteudo_media_valores_transacoes)
     
 
 def consultar_transacao_por_ID():
@@ -719,13 +759,13 @@ def consultar_transacao_por_ID():
     
     if id_consulta == "0":
         print("\nRetornando ao Menu Inicial\n")
-        run()
+        return run()
 
     indice = encontrar_transacao_por_chave_valor(bd, "UUID", id_consulta)
 
     if indice == -1:
         print("\nTransação não encontrada. Tente novamente")
-        consultar_transacao_por_ID()
+        return consultar_transacao_por_ID()
 
     else:
         print("\nTrasanção encontrada!\n")
@@ -736,8 +776,7 @@ def consultar_transacao_por_ID():
         
         nome_arquivo_transacao_especifica = "relatorio_transacao_id_" + id_consulta
         
-        salvar_relatorio(nome_arquivo_transacao_especifica, transacao_especifica)
-
+        return salvar_relatorio(nome_arquivo_transacao_especifica, transacao_especifica)
 
 def valor_transacao_cadastro():
     while True:
@@ -758,7 +797,7 @@ def valor_transacao_cadastro():
                    
     if valor_transacao == 0:
         print("\nRetornando ao menu inicial.\n")
-        run()
+        return run()
     
     valor_transacao = round(valor_transacao, 2)
 
@@ -799,14 +838,14 @@ def cadastrar_transacao():
     if continuar_cadastro == 1:
         bd.append(transacao)
         print("\nTransação cadastrada com sucesso\n")
-        refazer_operacao("repetir_cadastrar_transacao")
+        return refazer_operacao("repetir_cadastrar_transacao")
 
     elif continuar_cadastro == 2:
-        cadastrar_transacao()
+        return cadastrar_transacao()
 
     else:
         print("\nCadastro cancelado. Retornando ao menu inicial\n")
-        run()
+        return run()
 
 
 def editar_transacao_por_ID():
@@ -821,13 +860,13 @@ def editar_transacao_por_ID():
 
     if id_consulta == "0":
         print("Retornando ao menu principal")
-        run()
+        return run()
 
     indice = encontrar_transacao_por_chave_valor(bd, "UUID", id_consulta)
 
     if indice == -1:
-        print("\nTransação não encontrada. Voltando ao Menu Anterior")
-        visualizar_relatorios()
+        print("\nTransação não encontrada. Tente novamente.")
+        return editar_transacao_por_ID()
 
 
     else:
@@ -845,7 +884,7 @@ def editar_transacao_por_ID():
             conteudo_transacao_especifica(lista_transacoes = bd, indice = indice, imprimir=True)
             
             print("\nRetornando ao Menu Inicial\n")
-            run()
+            return run()
     
     
         elif opcao_usuario == 2:
@@ -854,12 +893,13 @@ def editar_transacao_por_ID():
             
             print("\nEdição concluída com sucesso. Novos dados dessa transação abaixo: \n")
             conteudo_transacao_especifica(lista_transacoes = bd, indice = indice, imprimir=True)
-            refazer_operacao("repetir_editar_transacao")
+            return refazer_operacao("repetir_editar_transacao")
 
         
         else:
             print("\nEdição cancelada. Retornando ao Menu Principal\n")
-            run()
+            return run()
+
 
 def excluir_transacao():
     """
@@ -871,13 +911,13 @@ def excluir_transacao():
 
     if id_consulta == "0":
         print("Retornando ao menu principal")
-        run()
+        return run()
 
     indice = encontrar_transacao_por_chave_valor(bd, "UUID", id_consulta)
 
     if indice == -1:
         print("\nTransação não encontrada. Voltando ao Menu Principal")
-        run()
+        return run()
 
     else:
         print("\nTrasanção encontrada!\n")
@@ -895,11 +935,11 @@ def excluir_transacao():
             del(bd[indice])
             
             print("\nExclusão realizada com sucesso.")
-            refazer_operacao("repetir_excluir_transacao")
+            return refazer_operacao("repetir_excluir_transacao")
             
         else:
             print("\nExclusão cancelada. Retornando ao menu principal\n")
-            run()
+            return run()
         
 
 
