@@ -352,40 +352,43 @@ def escolher_categoria_transacao():
     else:
         return dict_categoria[str(opcao_usuario)]
     
+def tela_login_eterna():
+    
+    nome_usuario, conta_usuario = informacoes_login()
+    
+    return run()
+    
 
 def run():
     """
     Esta é a função principal que vai rodar o programa
     """  
-    print("Carregando Menu...")
+    print("\nCarregando Menu...")
     
     sleep(3)
     
     os.system('cls' if os.name == 'nt' else 'clear')
 
-    global parar_programa
-    parar_programa = False
+    opcao_usuario = validar_opcao("menu_inicial")
     
-    while not parar_programa:
-
-        opcao_usuario = validar_opcao("menu_inicial")
+    if opcao_usuario == 0:
+        print("Você deslogou do sistema. Obrigado e volte sempre.\n")
+        sleep(3)
+        os.system('cls' if os.name == 'nt' else 'clear')
+        return tela_login_eterna()
         
-        if opcao_usuario == 0:
-            print("Você saiu do sistema. Obrigado e volte sempre.")
-            parar_programa = True
-            
-        elif opcao_usuario == 1:
-            visualizar_relatorios()
+    elif opcao_usuario == 1:
+        visualizar_relatorios()
 
-        elif opcao_usuario == 2:    
-            cadastrar_transacao()
-            
-        elif opcao_usuario == 3:
-            editar_transacao_por_ID()
-            
-        else:
-            print("\nMenu excluir transação\n")
-            excluir_transacao()
+    elif opcao_usuario == 2:    
+        cadastrar_transacao()
+        
+    elif opcao_usuario == 3:
+        editar_transacao_por_ID()
+        
+    else:
+        print("\nMenu excluir transação\n")
+        excluir_transacao()
 
         
 def visualizar_relatorios():
