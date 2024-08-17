@@ -1,5 +1,6 @@
 Vídeo demonstração modelo final - Feito por um professor
-https://github.com/andrefeitosa9/projeto-crud-santandercoders/blob/main/data/projeto_dspy017.mp4
+
+
 
 _ Lógica de programacao II - Ada Tech - Santander Coders_
 
