@@ -1,6 +1,7 @@
-https://github.com/allansuzuki/ADA_classes/assets/80737784/9f76cbc5-adad-476d-93d2-c132e52e0048
+Vídeo demonstração modelo final - Feito por um professor
+https://github.com/andrefeitosa9/projeto-crud-santandercoders/blob/main/data/projeto_dspy017.mp4
 
-_DS-PY-17 - logica de programacao II_
+_ Lógica de programacao II - Ada Tech - Santander Coders_
 
 Esse programa é um sistema de gestao de transacoes de uma conta bancária pessoal<br>
 no qual os dados são de transações e possuem seu valor, a categoria do gasto e seu ID.
