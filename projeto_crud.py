@@ -335,22 +335,25 @@ def refazer_operacao(menu):
 def escolher_categoria_transacao():
     
     dict_categoria = {
-        "1": "casa",
-        "2": "lazer",
-        "3": "viagens",
-        "4": "investimentos",
-        "5": "transferencias",
-        "6": "saude",
-        "7": "alimentacao"
-        }
+       1: "casa",
+       2: "lazer",
+       3: "viagens",
+       4: "investimentos",
+       5: "transferencias",
+       6: "saude",
+       7: "alimentacao"
+    }
     
     opcao_usuario = validar_opcao("categoria_transacao")
     
-    if opcao_usuario == 8:
-        return opcao_usuario
+    if opcao_usuario == 0:
 
-    else:
-        return dict_categoria[str(opcao_usuario)]
+        print("Operação cancelada. Retornando ao Menu principal.")
+        return run()
+    
+    categoria_escolhida = dict_categoria.get(opcao_usuario)
+    
+    return categoria_escolhida
     
 def tela_login_eterna():
     
@@ -456,8 +459,10 @@ def definir_categoria_filtragem(opcao_usuario):
     }
     
     opcao_usuario = str(opcao_usuario)
+
+    categoria_escolhida = dict_categoria.get(opcao_usuario)
     
-    return dict_categoria[opcao_usuario]
+    return categoria_escolhida
 
 
 def salvar_relatorio(nome_arquivo, conteudo):
@@ -466,10 +471,10 @@ def salvar_relatorio(nome_arquivo, conteudo):
     \nAplicar esta função em todos os relatórios listados em `visualizar_relatorios`
     """ 
     
-    salvar_relatorio = input("Deseja salvar o relatório? [S / N] ").strip().upper()[0]
+    salvar_relatorio = input("Deseja salvar o relatório? [S / N] ").strip().upper()
 
     while salvar_relatorio not in ["S", "N"]:
-        salvar_relatorio = input("\nOpção inválida. Digite novamente S ou N. Deseja salvar o relatório?").strip().upper()[0]
+        salvar_relatorio = input("\nOpção inválida. Digite novamente S ou N. Deseja salvar o relatório?").strip().upper()
 
     if salvar_relatorio == "S":
         
@@ -930,10 +935,10 @@ def excluir_transacao():
         
         conteudo_transacao_especifica(lista_transacoes=bd, indice=indice, imprimir_na_tela=True)
         
-        opcao_final_exclusao = input("Você tem certeza que deseja excluir essa transação? [S / N] ").strip().upper()[0]
+        opcao_final_exclusao = input("Você tem certeza que deseja excluir essa transação? [S / N] ").strip().upper()
     
         while opcao_final_exclusao not in ["S", "N"]:
-            opcao_final_exclusao = input("\nOpção inválida. Você tem certeza que deseja excluir essa transação? [S / N] ").strip().upper()[0]
+            opcao_final_exclusao = input("\nOpção inválida. Você tem certeza que deseja excluir essa transação? [S / N] ").strip().upper()
     
         if opcao_final_exclusao == "S":
             # Excluir o arquivo
