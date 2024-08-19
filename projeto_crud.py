@@ -344,10 +344,16 @@ def escolher_categoria_transacao():
         print("Operação cancelada. Retornando ao Menu principal.")
         return run()
     
+    elif opcao_usuario == None:
+        
+        print("\nErro. Escolha novamente\n")
+        return escolher_categoria_transacao()
+    
     else:
         categoria_escolhida = dict_categoria.get(opcao_usuario)
     
         return categoria_escolhida
+    
     
 def tela_login_eterna():
 
