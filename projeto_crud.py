@@ -270,7 +270,7 @@ def imprimir_menu_opcoes(menu):
         print("5. Transferências")
         print("6. Saúde")
         print("7. Alimentação")
-        print("8. Valor total da conta")
+        print("8. Relatório geral")
         print("0. Retornar ao Menu Principal")
 
 
@@ -295,6 +295,9 @@ def validar_opcao(menu):
             opcao_usuario = int(opcao_usuario)
             if opcao_usuario < 0 or opcao_usuario > quantidade_opcoes_menu[menu]:
                 raise Exception("Opção não existente.")
+            elif opcao_usuario == 0:
+                print("\nOperação cancelada. Retornando ao Menu principal.")
+                return run()
                 
         except ValueError:
             print("\nOpção inválida. Digite somente números. Tente novamente.")
@@ -755,9 +758,9 @@ def valor_transacao_cadastro():
     while True:
     
         try:
-            valor_transacao = float(input("Digite o valor da transação a ser cadastrada (use ponto em vez de vírgula no decimal): R$ ").strip())
+            valor_transacao = float(input("Digite o valor da transação (use ponto em vez de vírgula no decimal): R$ ").strip())
             if valor_transacao < 0:
-                raise Exception("Não é possível cadastrar uma transação menor que R$ 0,00.")
+                raise Exception("Não é possível inserir um valor menor que R$ 0,00.")
             break            
         except ValueError:
             print("Digite somente números. Use ponto em vez de vírgula no decimal.")
@@ -850,12 +853,12 @@ def editar_transacao_por_ID():
         opcao_usuario = validar_opcao("editar_transacao")
     
         if opcao_usuario == 1:
-            novo_valor_transacao = opcao_usuario()
+            novo_valor_transacao = valor_transacao_cadastro()
             bd[indice]["valor"] = novo_valor_transacao
             
             print("\nEdição concluída com sucesso. Novos dados dessa transação abaixo: \n")
 
-            conteudo_transacao_especifica(lista_transacoes = bd, indice = indice, imprimir=True)
+            conteudo_transacao_especifica(lista_transacoes = bd, indice = indice, imprimir_na_tela=True)
             
             print("\nRetornando ao Menu Inicial\n")
             return run()
@@ -866,7 +869,7 @@ def editar_transacao_por_ID():
             bd[indice]["categoria"] = nova_categoria_transacao
             
             print("\nEdição concluída com sucesso. Novos dados dessa transação abaixo: \n")
-            conteudo_transacao_especifica(lista_transacoes = bd, indice = indice, imprimir=True)
+            conteudo_transacao_especifica(lista_transacoes = bd, indice = indice, imprimir_na_tela=True)
             return refazer_operacao("repetir_editar_transacao")
 
         
