@@ -62,23 +62,6 @@ def load_bd(filepath='./data/transactions.json'):
     return bd
 
 
-# -----------------------
-# MAIN SCRIPT
-# -----------------------
-# não alterar nada abaixo
-if __name__ == "__main__":
-    
-    # -----------------------
-    # NÃO ALTERAR ESTE BLOCO
-    # -----------------------
-    # criar o banco de dados caso ele não exista
-    print(os.path.abspath('.'))
-    if not os.path.exists('./data/transactions.json'):
-        criar_bd()
-    
-    # load bd 
-    bd = load_bd()
-    # -----------------------
 
 
 # -----------------------
@@ -295,6 +278,13 @@ def validar_opcao(menu):
             opcao_usuario = int(opcao_usuario)
             if opcao_usuario < 0 or opcao_usuario > quantidade_opcoes_menu[menu]:
                 raise Exception("Opção não existente.")
+            
+            if menu == "menu_inicial" and opcao_usuario == 0:
+                print("Você deslogou do sistema. Obrigado e volte sempre.\n")
+                sleep(3)
+                os.system('cls' if os.name == 'nt' else 'clear')
+                return tela_login_eterna()
+
             elif opcao_usuario == 0:
                 print("\nOperação cancelada. Retornando ao Menu principal.")
                 return run()
@@ -360,7 +350,9 @@ def escolher_categoria_transacao():
         return categoria_escolhida
     
 def tela_login_eterna():
-    
+
+    os.system('cls' if os.name == 'nt' else 'clear')
+
     nome_usuario, conta_usuario = informacoes_login()
     
     return run()
@@ -682,7 +674,6 @@ def mostrar_m5_transacoes(parametro):
 
             
 
-
 def calcular_media():
     """
     Calcula a média dos valores das transações.
@@ -723,6 +714,7 @@ def calcular_media():
         nome_relatorio = "relatorio_media_valores_transacoes_" + categoria_para_filtrar
         
         return salvar_relatorio(nome_relatorio, conteudo_media_valores_transacoes)
+
     
 
 def consultar_transacao_por_ID():
@@ -919,9 +911,30 @@ def excluir_transacao():
             return run()
 
 
+
+
+# -----------------------
+# MAIN SCRIPT
+# -----------------------
+# não alterar nada abaixo
+if __name__ == "__main__":
+    
+    # -----------------------
+    # NÃO ALTERAR ESTE BLOCO
+    # -----------------------
+    # criar o banco de dados caso ele não exista
+    print(os.path.abspath('.'))
+    if not os.path.exists('./data/transactions.json'):
+        criar_bd()
+    
+    # load bd 
+    bd = load_bd()
+    # -----------------------
+
 # -----------------------
 # ABAIXO PODE ALTERAR
 # -----------------------
+
 #limpar console (opcional)
 os.system('cls' if os.name == 'nt' else 'clear')
 
