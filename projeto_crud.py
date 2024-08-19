@@ -351,9 +351,10 @@ def escolher_categoria_transacao():
         print("Operação cancelada. Retornando ao Menu principal.")
         return run()
     
-    categoria_escolhida = dict_categoria.get(opcao_usuario)
+    else:
+        categoria_escolhida = dict_categoria.get(opcao_usuario)
     
-    return categoria_escolhida
+        return categoria_escolhida
     
 def tela_login_eterna():
     
@@ -460,9 +461,14 @@ def definir_categoria_filtragem(opcao_usuario):
     
     opcao_usuario = str(opcao_usuario)
 
-    categoria_escolhida = dict_categoria.get(opcao_usuario)
+    if opcao_usuario == "0":
+
+        return run()
+
+    else:
+        categoria_escolhida = dict_categoria.get(opcao_usuario)
     
-    return categoria_escolhida
+        return categoria_escolhida
 
 
 def salvar_relatorio(nome_arquivo, conteudo):
@@ -673,48 +679,6 @@ def mostrar_m5_transacoes(parametro):
 
             
 
-def calcular_media():
-    """
-    Calcula a média dos valores das transações.
-    Utilize essa mesma função para o caso `por categoria`
-    """
-
-    opcao_usuario = validar_opcao("escolha_categoria_relatorio")
-    
-    if opcao_usuario == 8:
-        dados = bd
-
-    else:
-        categoria_para_filtrar = definir_categoria_filtragem(opcao_usuario)
-        dados = [transacao for transacao in bd if transacao["categoria"] == categoria_para_filtrar]
-      
-    
-    total_transacoes = sum(float(transacao["valor"]) for transacao in dados)
-    quantidade_transacoes = len(dados)
-
-    media_valores_transacoes = total_transacoes / quantidade_transacoes
-
-    if opcao_usuario == 8: 
-        conteudo_media_valores_transacoes = f"A média de valores das transações dessa conta é de R$ {media_valores_transacoes:.2f}"
-    
-        print("")
-        print(conteudo_media_valores_transacoes)
-        print("")
-        
-        return salvar_relatorio("relatorio_media_valores_transacoes", conteudo_media_valores_transacoes)
-
-    else:
-        conteudo_media_valores_transacoes = f"A média de valores das transações dessa conta na categoria {categoria_para_filtrar.capitalize()} é de R$ {media_valores_transacoes:.2f}"
-    
-        print("")
-        print(conteudo_media_valores_transacoes)
-        print("")
-
-        nome_relatorio = "relatorio_media_valores_transacoes_" + categoria_para_filtrar
-        
-        return salvar_relatorio(nome_relatorio, conteudo_media_valores_transacoes)
-
-            
 
 def calcular_media():
     """
