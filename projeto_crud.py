@@ -357,6 +357,9 @@ def escolher_categoria_transacao():
     
 def tela_login_eterna():
 
+    global nome_usuario
+    global conta_usuario
+
     os.system('cls' if os.name == 'nt' else 'clear')
 
     nome_usuario, conta_usuario = informacoes_login()
@@ -945,7 +948,4 @@ if __name__ == "__main__":
 os.system('cls' if os.name == 'nt' else 'clear')
 
 # inicia o programa
-nome_usuario, conta_usuario = informacoes_login()
-
-
-run()
+tela_login_eterna()
